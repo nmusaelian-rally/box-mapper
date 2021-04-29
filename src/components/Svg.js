@@ -27,7 +27,9 @@ const Svg = (props) => {
         <div>
             {
                 <svg width="500" height="500"> 
-                    {pairs.map(pair =><line x1={pair.x1} y1={pair.y1} x2={pair.x2} y2={pair.y2} stroke="black" key={pair.x1}/>)}
+                    {pairs.map(pair =>
+                        pair.x2 &&
+                        <line x1={pair.x1} y1={pair.y1} x2={pair.x2} y2={pair.y2} stroke="black" key={pair.x1}/>)}
                 </svg>
             }
         </div>
