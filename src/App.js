@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Box from './components/Box';
 import Svg from './components/Svg';
 
 function App() {
   const [pairs, setParis] = useState([]);
-  const [drawLine, setDrawLine] = useState(false);
-  useEffect(()=>{
-      console.log(pairs, drawLine)
-      if (pairs.length >= 2){
-        console.log('parirs.length', pairs.length, pairs)
-        setDrawLine(true);
-      }
-  }, [pairs, drawLine])
   return (
     <div className="App">
       {
-        drawLine && <Svg pairs={pairs} />
+        <Svg pairs={pairs} />
       }
                 <Box
                     className="left"
