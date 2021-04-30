@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import yaml from 'js-yaml';
 import Box from './components/Box';
 import Svg from './components/Svg';
+import {Button} from './components/Button';
 
 function App() {
   const [coordinates, setCoordinates] = useState([]);
@@ -28,7 +30,16 @@ function App() {
     const mappings = pairedCoordinates.map(xy => Object.assign(xy[0], xy[1]))
     return mappings;
   } 
-  
+
+  const handleDownload = () => {
+    const element = document.createElement("a");
+    const blob = new Blob([JSON.stringify(coordinates)], {type : 'application/json'});
+    element.href = URL.createObjectURL(blob);
+    element.download = "config.json";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   return (
     <div className="App">
       {
@@ -39,37 +50,41 @@ function App() {
                     top="80px"
                     left="20px"
                     onClick={(e) =>  handleClick(e)}
-                    >A</Box>
+                    >Name</Box>
                 <Box
                     className="left"
                     top="140px"
                     left="20px"
                     onClick={(e) => handleClick(e)}
-                    >B</Box>
+                    >State</Box>
                 <Box
                     className="left"
                     top="200px"
                     left="20px"
                     onClick={(e) => handleClick(e)}
-                    >C</Box>
+                    >SubmittedBy</Box>
                 <Box
                     className="right"
                     top="80px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
-                    >D</Box>
+                    >Summary</Box>
                 <Box
                     className="right"
                     top="140px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
-                    >E</Box>
+                    >Author</Box>
                 <Box
                     className="right"
                     top="200px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
-                    >F</Box>
+                    >Status</Box>
+                <Button
+                    className="save"
+                    onClick={() => handleDownload()}
+                    >Download</Button>
             </div>
   );
 }

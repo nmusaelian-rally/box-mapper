@@ -1,9 +1,16 @@
 body {
   font-family: sans-serif;
 }
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 .block {
   position: absolute;
-  width: 50px;
+  width: 100px;
   height: 50px;
   line-height: 50px;
   background-color: #000;
@@ -16,4 +23,16 @@ body {
 }
 .right {
   background-color: #3498DB;
+}
+.save {
+  position: relative;
+  margin: 20px;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid;
+  color: #28B463;
 }
