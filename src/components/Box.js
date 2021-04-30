@@ -5,7 +5,7 @@ const Box = (props) => {
     const style = { top, left, backgroundColor: color };
     return (
         <div
-            className={`block ${className}`}
+            className={`box ${className}`}
                 style={style}
                 onClick={props.onClick}
                 onMouseOut={props.onMouseOut}
