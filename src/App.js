@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import yaml from 'js-yaml';
 import Box from './components/Box';
 import Svg from './components/Svg';
 import {Button} from './components/Button';
@@ -28,7 +27,7 @@ function App() {
       }, []);
     
     const mappings = pairedCoordinates.map(xy => Object.assign(xy[0], xy[1]))
-    console.log('mappings', mappings);
+    //console.log('mappings', mappings);
     return mappings;
   } 
 
