@@ -18,10 +18,10 @@ body {
   text-align: center;
   color: #fff;
 }
-.left {
+.Rally {
   background-color: #E74C3C;
 }
-.right {
+.Other {
   background-color: #3498DB;
 }
 .save {

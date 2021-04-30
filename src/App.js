@@ -8,7 +8,7 @@ function App() {
   const [coordinates, setCoordinates] = useState([]);
 
   const handleClick  = e => {
-    const name = e.target.firstChild.textContent;
+    const name = e.target.firstChild.textContent + '_' + e.target.classList[1];
     setCoordinates(prev => prev.concat({[name]:[e.clientX, e.clientY]}));
   }
 
@@ -28,15 +28,29 @@ function App() {
       }, []);
     
     const mappings = pairedCoordinates.map(xy => Object.assign(xy[0], xy[1]))
+    console.log('mappings', mappings);
     return mappings;
   } 
 
+  const writeConfig = () => {
+    const config = {};
+    const keys = coordinates.map(xy => Object.keys(xy)); 
+    const flattenedKeys = keys.reduce((acc, cur)=> acc.concat(cur)); 
+    flattenedKeys.map(key => {
+      let fieldAndSystem = key.split('_');
+      if (!(fieldAndSystem[1] in config)) {
+          config[fieldAndSystem[1]] = []
+      } 
+      config[fieldAndSystem[1]].push(fieldAndSystem[0])
+    });
+    return config;
+  }
+
   const handleDownload = () => {
     const element = document.createElement("a");
-    const blob = new Blob([JSON.stringify(coordinates)], {type : 'application/json'});
+    const blob = new Blob([JSON.stringify(writeConfig())], {type : 'application/json'});
     element.href = URL.createObjectURL(blob);
     element.download = "config.json";
-    document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
 
@@ -46,37 +60,37 @@ function App() {
         <Svg pairs={reduceIntoPairs()} />
       }
                 <Box
-                    className="left"
+                    className="Rally"
                     top="80px"
                     left="20px"
                     onClick={(e) =>  handleClick(e)}
                     >Name</Box>
                 <Box
-                    className="left"
+                    className="Rally"
                     top="140px"
                     left="20px"
                     onClick={(e) => handleClick(e)}
                     >State</Box>
                 <Box
-                    className="left"
+                    className="Rally"
                     top="200px"
                     left="20px"
                     onClick={(e) => handleClick(e)}
                     >SubmittedBy</Box>
                 <Box
-                    className="right"
+                    className="Other"
                     top="80px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
                     >Summary</Box>
                 <Box
-                    className="right"
+                    className="Other"
                     top="140px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
                     >Author</Box>
                 <Box
-                    className="right"
+                    className="Other"
                     top="200px"
                     left="300px"
                     onClick={(e) => handleClick(e)}
